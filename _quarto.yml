@@ -3,7 +3,8 @@ project:
   output-dir: docs
 
 website:
-  title: "GitHub Portfolio"
+  title: "Chloe Surbeck"
+  ![](images/profile.jpg){width=250px}
   navbar:
     left:
       - href: index.qmd
