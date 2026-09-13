@@ -3,12 +3,12 @@ title: "About Me"
 ---
 
 ## About Me
-[- I am from Philadephia, PA (USA) and have a B.B.A. in Economics.
+- I am from Philadephia, PA (USA) and have a B.B.A. in Economics.
 - I studied at Temple University. I have worked with Janney Montgomery Scott and Kenvue.
-- I hope to learn technical skills in data science so that I may achieve literacy with applications, platforms and langauges releavant to the feild.]
+- I hope to learn technical skills in data science so that I may achieve literacy with applications, platforms and langauges releavant to the feild.
 
 ## Why Data Science?
-[Studying economics and working at places like Janney and Kenvue showed me how much good decisions depend on data. But I kept wanting to go beyond spreadsheets and learn how to work with larger, messier datasets myself. I joined UBC MDS to get hands-on with tools like Python, R, and Git, and to turn raw data into insights people can actually use.]
+Studying economics and working at places like Janney and Kenvue showed me how much good decisions depend on data. But I kept wanting to go beyond spreadsheets and learn how to work with larger, messier datasets myself. I joined UBC MDS to get hands-on with tools like Python, R, and Git, and to turn raw data into insights people can actually use.
 
 ## Outside of Data Science
-[Outside of classes, I’m usually out exploring Vancouver—moving here from Philly has been a huge change of scenery! On weekends, you’ll probably find me tracking down good coffee spots, dancing, drawing, or planning my next trip. When I’m taking it easy, I love listening to music, catching up with friends, and unwinding with a good book.]
+Outside of classes, I’m usually out exploring Vancouver—moving here from Philly has been a huge change of scenery! On weekends, you’ll probably find me tracking down good coffee spots, dancing, drawing, or planning my next trip. When I’m taking it easy, I love listening to music, catching up with friends, and unwinding with a good book.

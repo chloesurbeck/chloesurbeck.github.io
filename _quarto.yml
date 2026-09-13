@@ -4,12 +4,14 @@ project:
 
 website:
   title: "Chloe Surbeck"
-  ![](images/profile.jpg){width=250px}
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+      - href: blog.qmd
+        text: Blog
 
 format:
   html:

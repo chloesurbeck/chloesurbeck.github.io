@@ -1,7 +1,8 @@
 ---
-title: "Chloe's GitHub Portfolio"
+title: "Chloe Surbeck"
 ---
 
-This is a Quarto website.
+![yummy food!](images/profile.jpg){width=250px}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+Welcome to my website! I am currently a Master of Data Science student at the University of British Columbia. Originally from Philadelphia, I hold a background in economics and have experience working in quantitative business roles. I built this site to document my journey learning modern data science tools, reproducible workflows, and machine learning.
