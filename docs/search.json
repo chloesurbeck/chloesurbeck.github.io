@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My First Weeks in MDS",
+    "section": "",
+    "text": "orientation day!\n\n\nMoving all the way from Philly to Vancouver was a bit of a whirlwind, but orientation week made the move a lot easier. Stepping onto campus, taking in the mountain views, and meeting everyone in the cohort made me super excited to dive in.\nClasses definitely didn’t waste any time! We jumped straight into Bash, Git, Python, and R on day one. Coming from an economics background where everything was spreadsheets, living in the terminal was a little intimidating at first, but it felt great once the commands finally started clicking.\nNow that the initial rush has settled down, I’m really looking forward to the rest of the term. The cohort is great, and working through tough labs together makes the fast pace a lot more fun. I can’t wait to see how much we learn over the next few months!"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "My First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nChloe Surbeck\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "I am from Philadephia, PA (USA) and have a B.B.A. in Economics.\nI studied at Temple University. I have worked with Janney Montgomery Scott and Kenvue.\nI hope to learn technical skills in data science so that I may achieve literacy with applications, platforms and langauges releavant to the feild."
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "About Me",
+    "section": "",
+    "text": "I am from Philadephia, PA (USA) and have a B.B.A. in Economics.\nI studied at Temple University. I have worked with Janney Montgomery Scott and Kenvue.\nI hope to learn technical skills in data science so that I may achieve literacy with applications, platforms and langauges releavant to the feild."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "About Me",
+    "section": "Why Data Science?",
+    "text": "Why Data Science?\nStudying economics and working at places like Janney and Kenvue showed me how much good decisions depend on data. But I kept wanting to go beyond spreadsheets and learn how to work with larger, messier datasets myself. I joined UBC MDS to get hands-on with tools like Python, R, and Git, and to turn raw data into insights people can actually use."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "About Me",
+    "section": "Outside of Data Science",
+    "text": "Outside of Data Science\nOutside of classes, I’m usually out exploring Vancouver—moving here from Philly has been a huge change of scenery! On weekends, you’ll probably find me tracking down good coffee spots, dancing, drawing, or planning my next trip. When I’m taking it easy, I love listening to music, catching up with friends, and unwinding with a good book."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chloe Surbeck",
+    "section": "",
+    "text": "yummy food!\n\n\nWelcome to my website! I am currently a Master of Data Science student at the University of British Columbia. Originally from Philadelphia, I hold a background in economics and have experience working in quantitative business roles. I built this site to document my journey learning modern data science tools, reproducible workflows, and machine learning."
+  }
+]
