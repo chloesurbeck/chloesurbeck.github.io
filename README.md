@@ -27,6 +27,8 @@ git clone https://github.com/chloesurbeck/chloesurbeck.github.io.git
 cd chloesurbeck.github.io
 ```
 
+(renv does not need to be manually pre-installed; it bootstraps itself via .Rprofile)
+
 ### Step 2: Restore the Python Environment
 
 Run in your shell from the repository root:
@@ -61,7 +63,7 @@ uv run quarto render
     uv run quarto preview
     ```
 
-## 4. Data Source & Network Requirments
+## 4. Data Source & Network Requirements
 
 - **Data Source**: Palmer Archipelago penguin data from the `palmerpenguins` library. ([Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER)
 - **Network Requirements**: None; all data is bundled within the installed `palmerpenguins` packages for Python and R
