@@ -1,5 +1,5 @@
 ---
-title: "Trends in Penguin Body Mass by Species (2007–2009)"
+title: "Trends in Penguin Body Mass by Species (2007–2009) for R"
 author: "Chloe Surbeck"
 date: "2026-09-22"
 ---
