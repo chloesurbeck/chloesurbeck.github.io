@@ -1,87 +1,67 @@
 # chloesurbeck.github.io
 
-This repository hosts the source code and rendered artifacts for Chloe Surbeck's personal academic portfolio and data science blog, built with [Quarto](https://quarto.org/).
+This repository hosts my data science portfolio while at UBC. It contains a landing/about page, a relevant blog and two computing environments.
 
-- **Live Website**: [https://chloesurbeck.github.io](https://chloesurbeck.github.io)
-- **GitHub Repository**: [https://github.com/chloesurbeck/chloesurbeck.github.io](https://github.com/chloesurbeck/chloesurbeck.github.io)
+- **Live Website**: <https://chloesurbeck.github.io>
+- **GitHub Repository**: <https://github.com/chloesurbeck/chloesurbeck.github.io>
 
----
+## 1. Required Tools
 
-## Prerequisites
+Before building the site, ensure you have the following software installed on your system:
 
-Before building the site, ensure you have the following tools installed on your system:
+- [**Git**](https://git-scm.com/) (version 2.40+)
+- [**Quarto CLI**](https://quarto.org/docs/get-started/) (version 1.5+)
+- [**uv**](https://docs.astral.sh/uv/) (Python package and environment manager, version 0.4+)
+- [**R**](https://cloud.r-project.org/) (version 4.4+)
 
-1. **[Git](https://git-scm.com/)**
-2. **[Quarto CLI](https://quarto.org/docs/get-started/)** (version 1.5 or newer)
-3. **[uv](https://docs.astral.sh/uv/)** (Fast Python package and project manager)
-4. **[R](https://cloud.r-project.org/)** (version 4.4 or newer)
+## 2. Build Instructions
 
----
+Follow the steps in order from a terminal (bash) to clone the repository, restore both computing environments and render the complete website.
 
-## Reproduction & Build Instructions
+### Step 1: Clone the Repository
 
-Follow the steps below to clone the repository, restore the Python and R computing environments, and render the complete website.
+Run in your shell:
 
-### 1. Clone the Repository
-
-```bash
+``` bash
 git clone https://github.com/chloesurbeck/chloesurbeck.github.io.git
 cd chloesurbeck.github.io
 ```
 
-### 2. Set Up the Python Environment
+### Step 2: Restore the Python Environment
 
-The Python environment is managed using `uv` (configured in `pyproject.toml` and pinned in `uv.lock`). Run:
+Run in your shell from the repository root:
 
-```bash
+``` bash
 uv sync
 ```
 
-This will automatically create a virtual environment (`.venv/`) and install all required packages (including `jupyter`, `pandas`, `matplotlib`, and `palmerpenguins`).
+### Step 3: Restore the R Environment
 
-### 3. Set Up the R Environment
+Run in your shell from the repository root:
 
-The R environment is managed using `renv` (configured via `.Rprofile` and pinned in `renv.lock`). Run:
-
-```bash
+``` bash
 Rscript -e "renv::restore()"
 ```
 
-This will install all necessary R packages (including `palmerpenguins`, `dplyr`, `tidyr`, `ggplot2`, and `rmarkdown`) into the project's local library.
+### Step 4: Render the Website
 
-### 4. Render the Website
+Run in your shell from the repository root:
 
-Once both environments are restored, render the complete site into the `docs/` folder:
-
-```bash
+``` bash
 uv run quarto render
 ```
 
-### 5. Preview Locally (Optional)
+## 3. Site Landing & Local Opening
 
-To start a local live-reloading development server to view the site in your browser:
+- **Output Location**: Quarto renders into the **`docs/`** directory (which is published to GitHub).
+- **Opening Site Locally**:
+  - Run in your shell from the repository root:
 
-```bash
-uv run quarto preview
-```
+    ``` bash
+    uv run quarto preview
+    ```
 
----
+## 4. Data Source & Network Requirments
 
-## Project Structure
-
-```text
-chloesurbeck.github.io/
-├── _quarto.yml             # Quarto site configuration
-├── index.qmd               # Home landing page
-├── about.qmd               # About page
-├── blog.qmd                # Blog listing page
-├── posts/
-│   ├── first-weeks/        # Reflection on first weeks in MDS
-│   ├── python-penguins/    # Palmer Penguins data analysis in Python
-│   └── r-penguins/         # Palmer Penguins data analysis in R
-├── docs/                   # Rendered static site deployed to GitHub Pages
-├── pyproject.toml          # Python project & dependency specifications
-├── uv.lock                 # Pinned Python lockfile
-├── .Rprofile               # renv project auto-activation script
-└── renv.lock               # Pinned R lockfile
-```
+- **Data Source**: Palmer Archipelago penguin data from the `palmerpenguins` library. ([Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER)
+- **Network Requirements**: None; all data is bundled within the installed `palmerpenguins` packages for Python and R
