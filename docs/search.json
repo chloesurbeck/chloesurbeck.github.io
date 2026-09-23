@@ -1,5 +1,47 @@
 [
   {
+    "objectID": "posts/r-penguins/index.html#introduction",
+    "href": "posts/r-penguins/index.html#introduction",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Introduction",
+    "text": "Introduction\nWe have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/r-penguins/index.html#setup-data-ingestion",
+    "href": "posts/r-penguins/index.html#setup-data-ingestion",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Setup & Data Ingestion",
+    "text": "Setup & Data Ingestion\nPlease load the required R libraries below.\n\nlibrary(palmerpenguins)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\n\ndata(penguins)\nhead(penguins)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;"
+  },
+  {
+    "objectID": "posts/r-penguins/index.html#body-mass-summary-by-species",
+    "href": "posts/r-penguins/index.html#body-mass-summary-by-species",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Body Mass Summary by Species",
+    "text": "Body Mass Summary by Species\nFrom annual_mass we can observe that Gentoo penguins are the significantly heavier than the other species across all years.\n\n# clean raw penguins data by selecting relevant columns and removing rows with missing values (using drop_na)\nclean_penguins &lt;- penguins |&gt;\n  select(species, year, body_mass_g) |&gt;\n  drop_na(body_mass_g)\n\n# get average mass (using group_by) for species by year, get mean (mean) and round to/display whole number\naverage_mass &lt;- clean_penguins |&gt;\n  group_by(species, year) |&gt;\n  summarize(mean_body_mass_g = round(mean(body_mass_g)), .groups = \"drop\")\n\n# return average-penguin-mass\naverage_mass\n\n# A tibble: 9 × 3\n  species    year mean_body_mass_g\n  &lt;fct&gt;     &lt;int&gt;            &lt;dbl&gt;\n1 Adelie     2007             3696\n2 Adelie     2008             3742\n3 Adelie     2009             3665\n4 Chinstrap  2007             3694\n5 Chinstrap  2008             3800\n6 Chinstrap  2009             3725\n7 Gentoo     2007             5071\n8 Gentoo     2008             5020\n9 Gentoo     2009             5141"
+  },
+  {
+    "objectID": "posts/r-penguins/index.html#reshaping-for-yearly-comparison",
+    "href": "posts/r-penguins/index.html#reshaping-for-yearly-comparison",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Reshaping for Yearly Comparison",
+    "text": "Reshaping for Yearly Comparison\nNew observations from the average_mass_table: Adelie’s and Chinstrap’s average mass rose from 2007 -&gt; 2008, peaked in 2008 and then fell from 2008 -&gt; 2009. Gentoo didn’t follow this trend, instead falling between 2007 -&gt; 2008 and then rising from 2008 -&gt; 2009 (peaking in 2009).\n\n# pivot wider (using pivot_wider) the year into columns\naverage_mass_table &lt;- average_mass |&gt;\n  pivot_wider(names_from = year, values_from = mean_body_mass_g)\n\n# return \naverage_mass_table\n\n# A tibble: 3 × 4\n  species   `2007` `2008` `2009`\n  &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 Adelie      3696   3742   3665\n2 Chinstrap   3694   3800   3725\n3 Gentoo      5071   5020   5141"
+  },
+  {
+    "objectID": "posts/r-penguins/index.html#descriptive-statistics",
+    "href": "posts/r-penguins/index.html#descriptive-statistics",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nNew observations (and what they imply) from species_stats: Adelie’s standard deviation (459g) is the lowest of all species, indicating their data set has the least range of recorded weights. Chinstrap have nearly half the observations (68) either other species have (151 and 123); due to the observation count, Chinstrap have slightly smaller confidence intervals than Adelie (whom they share a 50% confidence interval with). Gentoo’s mean (5076g) is higher than the max of the other species (4775g and 4800g), implying that the average Gentoo penguin is more massive than the largest Adelie or Chinstrap.\n\n# for each species get summary statistics using mass, round to 0 decimals and display as whole number\nspecies_stats &lt;- clean_penguins |&gt;\n  group_by(species) |&gt;\n  summarize(\n    count = n(),\n    mean = round(mean(body_mass_g)),\n    std = round(sd(body_mass_g)),\n    min = min(body_mass_g),\n    q25 = round(quantile(body_mass_g, 0.25)),\n    median = median(body_mass_g),\n    q75 = round(quantile(body_mass_g, 0.75)),\n    max = max(body_mass_g)\n  )\n\nspecies_stats\n\n# A tibble: 3 × 9\n  species   count  mean   std   min   q25 median   q75   max\n  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1 Adelie      151  3701   459  2850  3350   3700  4000  4775\n2 Chinstrap    68  3733   384  2700  3488   3700  3950  4800\n3 Gentoo      123  5076   504  3950  4700   5000  5500  6300"
+  },
+  {
+    "objectID": "posts/r-penguins/index.html#visualizing-body-mass-trajectories",
+    "href": "posts/r-penguins/index.html#visualizing-body-mass-trajectories",
+    "title": "Trends in Penguin Body Mass by Species (2007–2009)",
+    "section": "Visualizing Body Mass Trajectories",
+    "text": "Visualizing Body Mass Trajectories\nFrom the graph we can see that there is a consistent gap in weights between Gentoo’s and Adelie’s/Chinstrap’s. Additionally, each individual species average mass only varies slightly between each year.\n\n# plot average mass over time by species using ggplot2\nggplot(average_mass, aes(x = year, y = mean_body_mass_g, color = species, group = species)) +\n  # draw lines connecting points for each species\n  geom_line(linewidth = 1) +\n  # add points on each observation year\n  geom_point(size = 2.5) +\n  # set title and axis labels\n  labs(\n    title = \"Mean Body Mass by Species (2007–2009)\",\n    x = \"Observation Year\",\n    y = \"Mean Body Mass (g)\",\n    color = \"Species\"\n  ) +\n  # force observation year to display only whole years\n  scale_x_continuous(breaks = c(2007, 2008, 2009)) +\n  # use a clean minimal theme\n  theme_minimal()\n\n\n\n\naverage body mass (g) across Palmer Penguin species from 2007-2009."
+  },
+  {
     "objectID": "posts/first-weeks/index.html",
     "href": "posts/first-weeks/index.html",
     "title": "My First Weeks in MDS",
@@ -11,7 +53,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Trends in Penguin Body Mass by Speicies (2007–2009)\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nChloe Surbeck\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nChloe Surbeck\n\n\n\n\n\nNo matching items"
+    "text": "Trends in Penguin Body Mass by Speicies (2007–2009)\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nChloe Surbeck\n\n\n\n\n\n\n\n\n\n\n\n\nTrends in Penguin Body Mass by Species (2007–2009)\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nChloe Surbeck\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nChloe Surbeck\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -49,18 +91,11 @@
     "text": "yummy food!\n\n\nWelcome to my website! I am currently a Master of Data Science student at the University of British Columbia. Originally from Philadelphia, I hold a background in economics and have experience working in quantitative business roles. I built this site to document my journey learning modern data science tools, reproducible workflows, and machine learning."
   },
   {
-    "objectID": "posts/python-penguins/index.html",
-    "href": "posts/python-penguins/index.html",
-    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
-    "section": "",
-    "text": "We have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
-  },
-  {
     "objectID": "posts/python-penguins/index.html#introduction",
     "href": "posts/python-penguins/index.html#introduction",
     "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
-    "section": "",
-    "text": "We have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+    "section": "Introduction",
+    "text": "Introduction\nWe have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
   },
   {
     "objectID": "posts/python-penguins/index.html#setup-data-ingestion",
@@ -74,27 +109,27 @@
     "href": "posts/python-penguins/index.html#body-mass-summary-by-species",
     "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
     "section": "Body Mass Summary by Species",
-    "text": "Body Mass Summary by Species\n\n# clean raw penguins data by indexing relevant columns and removing rows with missing values (using .dropna())\nclean_penguins = penguins[[\"species\", \"year\", \"body_mass_g\"]].dropna()\n\n# get average mass (using group.by) for species by year, get mean (.mean) and round to/display whole number\nannual_mass = clean_penguins.groupby([\"species\", \"year\"])[\"body_mass_g\"].mean().round(0).astype(int)\n\n# print annual-penguin-mass\nannual_mass\n\nspecies    year\nAdelie     2007    3696\n           2008    3742\n           2009    3665\nChinstrap  2007    3694\n           2008    3800\n           2009    3725\nGentoo     2007    5071\n           2008    5020\n           2009    5141\nName: body_mass_g, dtype: int64\n\n\nFrom annual_mass we can observe that Gentoo penguins are the heaviest species across all years."
+    "text": "Body Mass Summary by Species\nFrom annual_mass we can observe that Gentoo penguins are the significantly heavier than the other species across all years.\n\n# clean raw penguins data by indexing relevant columns and removing rows with missing values (using .dropna)\nclean_penguins = penguins[[\"species\", \"year\", \"body_mass_g\"]].dropna()\n\n# get average mass (using group.by) for species by year, get mean (.mean) and round to/display whole number\naverage_mass = clean_penguins.groupby([\"species\", \"year\"])[\"body_mass_g\"].mean().round(0).astype(int)\n\n# return average-penguin-mass\naverage_mass.reset_index()\n\n\n\n\n\n\n\n\nspecies\nyear\nbody_mass_g\n\n\n\n\n0\nAdelie\n2007\n3696\n\n\n1\nAdelie\n2008\n3742\n\n\n2\nAdelie\n2009\n3665\n\n\n3\nChinstrap\n2007\n3694\n\n\n4\nChinstrap\n2008\n3800\n\n\n5\nChinstrap\n2009\n3725\n\n\n6\nGentoo\n2007\n5071\n\n\n7\nGentoo\n2008\n5020\n\n\n8\nGentoo\n2009\n5141\n\n\n\n\n\naverage body mass (g) of penguin by species and year"
   },
   {
     "objectID": "posts/python-penguins/index.html#reshaping-for-yearly-comparison",
     "href": "posts/python-penguins/index.html#reshaping-for-yearly-comparison",
     "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
     "section": "Reshaping for Yearly Comparison",
-    "text": "Reshaping for Yearly Comparison\nAs practiced in DSCI 511 Worksheet 6, when working with a multi-level grouped object, we can use .unstack() to move the year index into columns for a side-by-side comparison:\n\n# Unstack the year index level into columns\nannual_mass_table = annual_mass.unstack(level=\"year\")\nannual_mass_table\n\n\n\n\n\n\n\nyear\n2007\n2008\n2009\n\n\nspecies\n\n\n\n\n\n\n\nAdelie\n3696\n3742\n3665\n\n\nChinstrap\n3694\n3800\n3725\n\n\nGentoo\n5071\n5020\n5141\n\n\n\n\n\n\n\nFrom this table, we observe: * Adélie: Rose from \\(3,696\\text{ g}\\) in 2007 to \\(3,742\\text{ g}\\) in 2008, before dipping slightly to \\(3,665\\text{ g}\\) in 2009. * Chinstrap: Peaked in 2008 at \\(3,800\\text{ g}\\) and settled at \\(3,725\\text{ g}\\) in 2009. * Gentoo: Dipped slightly in 2008 to \\(5,020\\text{ g}\\) before reaching their highest recorded weight of \\(5,141\\text{ g}\\) in 2009."
+    "text": "Reshaping for Yearly Comparison\nNew observations from the average_mass_table: Adelie’s and Chinstrap’s average mass rose from 2007 -&gt; 2008, peaked in 2008 and then feel from 2008 -&gt; 2009. Gentoo didn’t follow this trend, instead falling between 2007 -&gt; 2008 and then rising from 2008 -&gt; 2009 (peaking in 2009).\n\n# unstack (using .unstack) the year index into columns\naverage_mass_table = average_mass.unstack(level = \"year\")\n\n# clears \"year\" label on table\naverage_mass_table.columns.name = None\n\n# return \naverage_mass_table\n\n\n\n\n\n\n\n\n2007\n2008\n2009\n\n\nspecies\n\n\n\n\n\n\n\nAdelie\n3696\n3742\n3665\n\n\nChinstrap\n3694\n3800\n3725\n\n\nGentoo\n5071\n5020\n5141\n\n\n\n\n\ncomparsion of average body mass (g) for each species over the given years"
   },
   {
-    "objectID": "posts/python-penguins/index.html#descriptive-statistics-dsci-551",
-    "href": "posts/python-penguins/index.html#descriptive-statistics-dsci-551",
+    "objectID": "posts/python-penguins/index.html#descriptive-statistics",
+    "href": "posts/python-penguins/index.html#descriptive-statistics",
     "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
-    "section": "Descriptive Statistics (DSCI 551)",
-    "text": "Descriptive Statistics (DSCI 551)\nUsing .describe() from DSCI 511 and DSCI 551, we examine the overall distribution of body mass (mean, standard deviation, quartiles) across the three species:\n\nspecies_stats = clean_penguins.groupby(\"species\")[\"body_mass_g\"].describe().round(1)\nspecies_stats\n\n\n\n\n\n\n\n\ncount\nmean\nstd\nmin\n25%\n50%\n75%\nmax\n\n\nspecies\n\n\n\n\n\n\n\n\n\n\n\n\nAdelie\n151.0\n3700.7\n458.6\n2850.0\n3350.0\n3700.0\n4000.0\n4775.0\n\n\nChinstrap\n68.0\n3733.1\n384.3\n2700.0\n3487.5\n3700.0\n3950.0\n4800.0\n\n\nGentoo\n123.0\n5076.0\n504.1\n3950.0\n4700.0\n5000.0\n5500.0\n6300.0"
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\nNew observations (and what they imply) from species_stats: Adelie’s standard deviation (459g) is the lowest of all species, indicating their data set has the least range of recorded weights. Chinstrap have nearly half the observations (68) either other species have (151 and 123); due to the observation count, Chinstrap have slightly smaller confidence intervals than Adelie (whom they share a 50% confidence interval with). Gentoo’s mean (5075g) is higher than the max of the other species (4775g and 4800g), implying that the average Gentoo penguin is more massive than the largest Adelie or Chinstrap.\n\n# for each species get the summary statistics (.describe) using mass, round to 0 decimals and display as whole number\nspecies_stats = clean_penguins.groupby(\"species\")[\"body_mass_g\"].describe().round(0).astype(int)\n\nspecies_stats\n\n\n\n\n\n\n\n\ncount\nmean\nstd\nmin\n25%\n50%\n75%\nmax\n\n\nspecies\n\n\n\n\n\n\n\n\n\n\n\n\nAdelie\n151\n3701\n459\n2850\n3350\n3700\n4000\n4775\n\n\nChinstrap\n68\n3733\n384\n2700\n3488\n3700\n3950\n4800\n\n\nGentoo\n123\n5076\n504\n3950\n4700\n5000\n5500\n6300\n\n\n\n\n\nstatistics to help examine overall distribution of mass"
   },
   {
     "objectID": "posts/python-penguins/index.html#visualizing-body-mass-trajectories",
     "href": "posts/python-penguins/index.html#visualizing-body-mass-trajectories",
     "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
     "section": "Visualizing Body Mass Trajectories",
-    "text": "Visualizing Body Mass Trajectories\nUsing Matplotlib (as introduced in the DSCI 511 Appendix), we transpose our unstacked table so year is on the x-axis and plot the annual trajectories:\n\n# Transpose the table so years are rows, and plot each species as a line\nax = annual_mass_table.T.plot(marker=\"o\", figsize=(7, 4.5))\nplt.title(\"Mean Body Mass by Species (2007–2009)\")\nplt.xlabel(\"Observation Year\")\nplt.ylabel(\"Mean Body Mass (g)\")\nplt.xticks([2007, 2008, 2009])\nplt.grid(True, linestyle=\"--\", alpha=0.5)\nplt.legend(title=\"Species\")\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Annual mean body mass (g) across Palmer Penguin species from 2007 to 2009.\n\n\n\n\n\nThe visualization demonstrates that across all three years, the weight separation between Gentoo penguins and the other two species remains consistent, with only modest year-to-year variation within each species."
+    "text": "Visualizing Body Mass Trajectories\nFrom the graph we can see that there is a consistent gap in weights between Gentoo’s and Adelie’s/Chinstrap’s. Additionally, each individual species average mass only varies slightly between each year.\n\n# transpose the table so years are rows and plot each species as a line; this uses Matplotlib\nax = average_mass_table.T.plot()\n# sets title\nplt.title(\"Mean Body Mass by Species (2007–2009)\")\n# sets x-axis label\nplt.xlabel(\"Observation Year\")\n# sets y-axis label\nplt.ylabel(\"Mean Body Mass (g)\")\n# forces observation year to display only real years\nplt.xticks([2007, 2008, 2009])\n# give us the graph!\nplt.show()\n\n\n\n\naverage body mass (g) across Palmer Penguin species from 2007-2009."
   }
 ]

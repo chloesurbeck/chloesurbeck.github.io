@@ -1,0 +1,123 @@
+---
+title: "Trends in Penguin Body Mass by Species (2007–2009)"
+author: "Chloe Surbeck"
+date: "2026-09-22"
+---
+
+![](images/penguin-dance-pengu.gif){fig-align="center"}
+
+## Introduction
+
+We have done a lot of work in DSCI 523 using `palmerpenguins` dataset. I wanted to see how the `body_mass` (g) of these penguin `species` (Adelie, Chinstrap and Gentoo) changed over the `year` (2007 - 2009).
+
+**Data source**: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.
+
+## Setup & Data Ingestion
+
+Please load the required R libraries below.
+
+```{r}
+#| label: setup-r
+#| message: false
+#| warning: false
+
+library(palmerpenguins)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+data(penguins)
+head(penguins)
+```
+
+## Body Mass Summary by Species
+
+From `annual_mass` we can observe that Gentoo penguins are the significantly heavier than the other species across all years.
+
+```{r}
+#| label: average-penguin-mass
+#| fig-cap: "average body mass (g) of penguin by species and year"
+
+# clean raw penguins data by selecting relevant columns and removing rows with missing values (using drop_na)
+clean_penguins <- penguins |>
+  select(species, year, body_mass_g) |>
+  drop_na(body_mass_g)
+
+# get average mass (using group_by) for species by year, get mean (mean) and round to/display whole number
+average_mass <- clean_penguins |>
+  group_by(species, year) |>
+  summarize(mean_body_mass_g = round(mean(body_mass_g)), .groups = "drop")
+
+# return average-penguin-mass
+average_mass
+```
+
+## Reshaping for Yearly Comparison
+
+New observations from the `average_mass_table`: Adelie's and Chinstrap's average mass rose from 2007 -\> 2008, peaked in 2008 and then fell from 2008 -\> 2009. Gentoo didn't follow this trend, instead falling between 2007 -\> 2008 and then rising from 2008 -\> 2009 (peaking in 2009).
+
+```{r}
+#| label: pivot-average-mass
+#| fig-cap: "comparsion of average body mass (g) for each species over the given years"
+
+# pivot wider (using pivot_wider) the year into columns
+average_mass_table <- average_mass |>
+  pivot_wider(names_from = year, values_from = mean_body_mass_g)
+
+# return 
+average_mass_table
+```
+
+## Descriptive Statistics
+
+New observations (and what they imply) from species_stats: Adelie's standard deviation (459g) is the lowest of all species, indicating their data set has the least range of recorded weights. Chinstrap have nearly half the observations (68) either other species have (151 and 123); due to the observation count, Chinstrap have slightly smaller confidence intervals than Adelie (whom they share a 50% confidence interval with). Gentoo's mean (5076g) is higher than the max of the other species (4775g and 4800g), implying that the average Gentoo penguin is more massive than the largest Adelie or Chinstrap.
+
+```{r}
+#| label: descriptive-stats
+#| fig-cap: "statistics to help examine overall distribution of mass"
+
+# for each species get summary statistics using mass, round to 0 decimals and display as whole number
+species_stats <- clean_penguins |>
+  group_by(species) |>
+  summarize(
+    count = n(),
+    mean = round(mean(body_mass_g)),
+    std = round(sd(body_mass_g)),
+    min = min(body_mass_g),
+    q25 = round(quantile(body_mass_g, 0.25)),
+    median = median(body_mass_g),
+    q75 = round(quantile(body_mass_g, 0.75)),
+    max = max(body_mass_g)
+  )
+
+species_stats
+```
+
+## Visualizing Body Mass Trajectories
+
+From the graph we can see that there is a consistent gap in weights between Gentoo's and Adelie's/Chinstrap's. Additionally, each individual `species` average mass only varies slightly between each year.
+
+```{r}
+#| label: penguin-mass-trends
+#| fig-cap: "average body mass (g) across Palmer Penguin species from 2007-2009."
+
+# plot average mass over time by species using ggplot2
+ggplot(average_mass, aes(x = year, y = mean_body_mass_g, color = species, group = species)) +
+  # draw lines connecting points for each species
+  geom_line(linewidth = 1) +
+  # add points on each observation year
+  geom_point(size = 2.5) +
+  # set title and axis labels
+  labs(
+    title = "Mean Body Mass by Species (2007–2009)",
+    x = "Observation Year",
+    y = "Mean Body Mass (g)",
+    color = "Species"
+  ) +
+  # force observation year to display only whole years
+  scale_x_continuous(breaks = c(2007, 2008, 2009)) +
+  # use a clean minimal theme
+  theme_minimal()
+```
+
+![](images/d64cbd5e846f4d579c00460f4dfee0b9.gif){fig-align="center"}
