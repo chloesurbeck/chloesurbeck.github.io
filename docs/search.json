@@ -11,7 +11,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "My First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nChloe Surbeck\n\n\n\n\n\nNo matching items"
+    "text": "Trends in Penguin Body Mass by Speicies (2007–2009)\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nChloe Surbeck\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nChloe Surbeck\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -47,5 +47,54 @@
     "title": "Chloe Surbeck",
     "section": "",
     "text": "yummy food!\n\n\nWelcome to my website! I am currently a Master of Data Science student at the University of British Columbia. Originally from Philadelphia, I hold a background in economics and have experience working in quantitative business roles. I built this site to document my journey learning modern data science tools, reproducible workflows, and machine learning."
+  },
+  {
+    "objectID": "posts/python-penguins/index.html",
+    "href": "posts/python-penguins/index.html",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "",
+    "text": "We have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#introduction",
+    "href": "posts/python-penguins/index.html#introduction",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "",
+    "text": "We have done a lot of work in DSCI 523 using palmerpenguins dataset. I wanted to see how the body_mass (g) of these penguin species (Adelie, Chinstrap and Gentoo) changed over the year (2007 - 2009).\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#setup-data-ingestion",
+    "href": "posts/python-penguins/index.html#setup-data-ingestion",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "Setup & Data Ingestion",
+    "text": "Setup & Data Ingestion\nPlease load the required Python libraries below.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom palmerpenguins import load_penguins\n\npenguins = load_penguins()\npenguins.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007"
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#body-mass-summary-by-species",
+    "href": "posts/python-penguins/index.html#body-mass-summary-by-species",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "Body Mass Summary by Species",
+    "text": "Body Mass Summary by Species\n\n# clean raw penguins data by indexing relevant columns and removing rows with missing values (using .dropna())\nclean_penguins = penguins[[\"species\", \"year\", \"body_mass_g\"]].dropna()\n\n# get average mass (using group.by) for species by year, get mean (.mean) and round to/display whole number\nannual_mass = clean_penguins.groupby([\"species\", \"year\"])[\"body_mass_g\"].mean().round(0).astype(int)\n\n# print annual-penguin-mass\nannual_mass\n\nspecies    year\nAdelie     2007    3696\n           2008    3742\n           2009    3665\nChinstrap  2007    3694\n           2008    3800\n           2009    3725\nGentoo     2007    5071\n           2008    5020\n           2009    5141\nName: body_mass_g, dtype: int64\n\n\nFrom annual_mass we can observe that Gentoo penguins are the heaviest species across all years."
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#reshaping-for-yearly-comparison",
+    "href": "posts/python-penguins/index.html#reshaping-for-yearly-comparison",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "Reshaping for Yearly Comparison",
+    "text": "Reshaping for Yearly Comparison\nAs practiced in DSCI 511 Worksheet 6, when working with a multi-level grouped object, we can use .unstack() to move the year index into columns for a side-by-side comparison:\n\n# Unstack the year index level into columns\nannual_mass_table = annual_mass.unstack(level=\"year\")\nannual_mass_table\n\n\n\n\n\n\n\nyear\n2007\n2008\n2009\n\n\nspecies\n\n\n\n\n\n\n\nAdelie\n3696\n3742\n3665\n\n\nChinstrap\n3694\n3800\n3725\n\n\nGentoo\n5071\n5020\n5141\n\n\n\n\n\n\n\nFrom this table, we observe: * Adélie: Rose from \\(3,696\\text{ g}\\) in 2007 to \\(3,742\\text{ g}\\) in 2008, before dipping slightly to \\(3,665\\text{ g}\\) in 2009. * Chinstrap: Peaked in 2008 at \\(3,800\\text{ g}\\) and settled at \\(3,725\\text{ g}\\) in 2009. * Gentoo: Dipped slightly in 2008 to \\(5,020\\text{ g}\\) before reaching their highest recorded weight of \\(5,141\\text{ g}\\) in 2009."
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#descriptive-statistics-dsci-551",
+    "href": "posts/python-penguins/index.html#descriptive-statistics-dsci-551",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "Descriptive Statistics (DSCI 551)",
+    "text": "Descriptive Statistics (DSCI 551)\nUsing .describe() from DSCI 511 and DSCI 551, we examine the overall distribution of body mass (mean, standard deviation, quartiles) across the three species:\n\nspecies_stats = clean_penguins.groupby(\"species\")[\"body_mass_g\"].describe().round(1)\nspecies_stats\n\n\n\n\n\n\n\n\ncount\nmean\nstd\nmin\n25%\n50%\n75%\nmax\n\n\nspecies\n\n\n\n\n\n\n\n\n\n\n\n\nAdelie\n151.0\n3700.7\n458.6\n2850.0\n3350.0\n3700.0\n4000.0\n4775.0\n\n\nChinstrap\n68.0\n3733.1\n384.3\n2700.0\n3487.5\n3700.0\n3950.0\n4800.0\n\n\nGentoo\n123.0\n5076.0\n504.1\n3950.0\n4700.0\n5000.0\n5500.0\n6300.0"
+  },
+  {
+    "objectID": "posts/python-penguins/index.html#visualizing-body-mass-trajectories",
+    "href": "posts/python-penguins/index.html#visualizing-body-mass-trajectories",
+    "title": "Trends in Penguin Body Mass by Speicies (2007–2009)",
+    "section": "Visualizing Body Mass Trajectories",
+    "text": "Visualizing Body Mass Trajectories\nUsing Matplotlib (as introduced in the DSCI 511 Appendix), we transpose our unstacked table so year is on the x-axis and plot the annual trajectories:\n\n# Transpose the table so years are rows, and plot each species as a line\nax = annual_mass_table.T.plot(marker=\"o\", figsize=(7, 4.5))\nplt.title(\"Mean Body Mass by Species (2007–2009)\")\nplt.xlabel(\"Observation Year\")\nplt.ylabel(\"Mean Body Mass (g)\")\nplt.xticks([2007, 2008, 2009])\nplt.grid(True, linestyle=\"--\", alpha=0.5)\nplt.legend(title=\"Species\")\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Annual mean body mass (g) across Palmer Penguin species from 2007 to 2009.\n\n\n\n\n\nThe visualization demonstrates that across all three years, the weight separation between Gentoo penguins and the other two species remains consistent, with only modest year-to-year variation within each species."
   }
 ]
