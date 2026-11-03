@@ -4,14 +4,42 @@ project:
 
 website:
   title: "Chloe Surbeck"
+  favicon: images/favicon.jpg
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
-      - href: blog.qmd
-        text: Blog
+      - href: risk-validation.qmd
+        text: Risk & Validation
+      - href: arts-and-drafts.qmd
+        text: Arts & Draft
+      # Reserved for future launch (DO NOT ADD YET):
+      # - href: metric-monday.qmd
+      #   text: Metric Monday
+    right:
+      - icon: github
+        href: https://github.com/chloesurbeck
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/chloesurbeck/
+        aria-label: LinkedIn
+      - icon: instagram
+        href: https://www.instagram.com/phuonglantanaka/
+        aria-label: Instagram
+      - icon: envelope
+        href: mailto:phuonglantanaka@gmail.com
+        aria-label: Email
+  page-footer:
+    left: "© 2026 Chloe Surbeck (Phuong Lan Tanaka). All Rights Reserved."
+    right:
+      - icon: github
+        href: https://github.com/chloesurbeck
+      - icon: linkedin
+        href: https://www.linkedin.com/in/chloesurbeck/
+      - icon: instagram
+        href: https://www.instagram.com/phuonglantanaka/
+      - icon: youtube
+        href: https://www.youtube.com/@phuonglantanaka
 
 format:
   html:
@@ -20,6 +48,3 @@ format:
       - brand
     css: styles.css
     toc: true
-
-
-

@@ -1,69 +1,41 @@
-# chloesurbeck.github.io
+# Chloe Surbeck (Phuong Lan Tanaka) — Unified Portfolio & Website
 
-This repository hosts my data science portfolio while at UBC. It contains a landing/about page, a relevant blog and two computing environments.
+This repository hosts the unified personal, quantitative risk / data science, and visual arts website for **Chloe Surbeck (Phuong Lan Tanaka)**.
 
-- **Live Website**: <https://chloesurbeck.github.io>
+- **GitHub Pages URL**: <https://chloesurbeck.github.io>
+- **Custom Domain**: <https://phuonglantanaka.com>
 - **GitHub Repository**: <https://github.com/chloesurbeck/chloesurbeck.github.io>
 
-## 1. Required Tools
+---
 
-Before building the site, ensure you have the following software installed on your system:
+## Site Architecture
 
-- [**Git**](https://git-scm.com/) (version 2.40+)
-- [**Quarto CLI**](https://quarto.org/docs/get-started/) (version 1.5+)
-- [**uv**](https://docs.astral.sh/uv/) (Python package and environment manager, version 0.4+)
-- [**R**](https://cloud.r-project.org/) (version 4.4+)
+1. **Home (`index.qmd`)**: Combined landing and biography page featuring pronouns (`she/her`), micro-biography, academic & industry snapshot (UBC MDS, Temple University Economics), photos, and social/contact links.
+2. **Risk & Validation (`risk-validation.qmd`)**: UBC MDS 6-Block composite portfolio featuring unified 3-act validation papers (Quant Build, MRM Audit, Governance Synthesis) paired with links to GitHub repositories and interactive risk applications.
+3. **Arts & Draft (`arts-and-drafts.qmd`)**: Visual arts, collage, illustration, and rough animation portfolio (2020–2025) migrated from `phuonglantanaka.com/portfolio`.
+4. **Metric Monday *(Reserved / Not Yet Active)***: Commented out in `_quarto.yml` for future ongoing tracking & media essays.
 
-## 2. Build Instructions
+---
 
-Follow the steps in order from a terminal (bash) to clone the repository, restore both computing environments and render the complete website.
+## Local Build & Preview
 
-### Step 1: Clone the Repository
+```powershell
+# Render full site into docs/
+quarto render
 
-Run in your shell:
-
-``` bash
-git clone https://github.com/chloesurbeck/chloesurbeck.github.io.git
-cd chloesurbeck.github.io
+# Live preview locally
+quarto preview
 ```
 
-(renv does not need to be manually pre-installed; it bootstraps itself via .Rprofile)
+---
 
-### Step 2: Restore the Python Environment
+## Linking `phuonglantanaka.com` to GitHub Pages (When Ready)
 
-Run in your shell from the repository root:
-
-``` bash
-uv sync
-```
-
-### Step 3: Restore the R Environment
-
-Run in your shell from the repository root:
-
-``` bash
-Rscript -e "renv::restore()"
-```
-
-### Step 4: Render the Website
-
-Run in your shell from the repository root:
-
-``` bash
-uv run quarto render
-```
-
-## 3. Site Landing & Local Opening
-
-- **Output Location**: Quarto renders into the **`docs/`** directory (which is published to GitHub).
-- **Opening Site Locally**:
-  - Run in your shell from the repository root:
-
-    ``` bash
-    uv run quarto preview
-    ```
-
-## 4. Data Source & Network Requirements
-
-- **Data Source**: Palmer Archipelago penguin data from the `palmerpenguins` library. ([Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER)
-- **Network Requirements**: None; all data is bundled within the installed `palmerpenguins` packages for Python and R
+1. In your domain registrar (GoDaddy) DNS settings for `phuonglantanaka.com`:
+   - Add four `A` records for `@` pointing to GitHub Pages IPs:
+     - `185.199.108.153`
+     - `185.199.109.153`
+     - `185.199.110.153`
+     - `185.199.111.153`
+   - Add a `CNAME` record for `www` pointing to `chloesurbeck.github.io`.
+2. In GitHub (`Settings -> Pages -> Custom domain`), enter `phuonglantanaka.com` and enable **Enforce HTTPS**.

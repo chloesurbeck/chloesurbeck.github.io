@@ -1,0 +1,65 @@
+---
+title: "Block 1: Data Lineage & Distributional Failure Audit"
+subtitle: "Enforcing programmatic boundary invariants for heavy-tailed credit loss governance"
+author: "Chloe Surbeck"
+date: "2026-10-15"
+categories: [Credit Risk, MRM / SR 11-7, Tail Risk, Block 1]
+description: "Calibrating parametric heavy-tailed loss distributions (Pareto, Weibull) for 99.9% Value-at-Risk (VaR) and auditing pipeline boundary invariants with pytest against Gaussian tail collapse."
+toc: true
+---
+
+::: {.project-links-bar}
+[💻 GitHub Repository](https://github.com/chloesurbeck){.btn .btn-outline-primary .btn-sm}
+[📊 Dataset: Freddie Mac / LendingClub](https://github.com/chloesurbeck){.btn .btn-outline-secondary .btn-sm}
+[🏛️ Regulatory Standard: SR 11-7 & Basel III](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm){.btn .btn-outline-dark .btn-sm}
+:::
+
+---
+
+## Executive Stakes: Why Gaussian Assumptions Fail in Credit Tail Risk
+
+Under **Basel III/IV** internal ratings-based (IRB) capital standards and **Federal Reserve SR 11-7** model risk guidelines, capital adequacy hinges on accurately estimating unexpected losses at the **99.9th percentile ($\text{VaR}_{99.9\%}$)**. When upstream ETL pipelines silently coerce extreme loss observations or when First-Line models rely on thin-tailed Gaussian approximations, regulatory capital is systematically understated during macroeconomic stress regimes.
+
+This validation dossier integrates knowledge from **UBC MDS Block 1** (*DSCI 511, 521, 523, 551*) into a unified 3-act quantitative risk and validation study.
+
+---
+
+## Act 1: The Quant Build (First Line)
+
+### 1.1 Mathematical Formulation & Parametric Loss Calibration
+We model portfolio loss severity $L$ across heavy-tailed parametric families—specifically the **Generalized Pareto Distribution (GPD)** and **Weibull** distributions—contrasted against a baseline Gaussian fit:
+
+$$
+f_{\text{Pareto}}(x; \alpha, x_m) = \frac{\alpha \, x_m^\alpha}{x^{\alpha+1}}, \quad x \ge x_m
+$$
+
+$$
+\text{VaR}_{\alpha}(L) = \inf \{ l \in \mathbb{R} : P(L > l) \le 1 - \alpha \}, \quad \alpha = 0.999
+$$
+
+### 1.2 Baseline Tail Loss Estimation
+- **Empirical vs. Parametric Fit**: Calibration of maximum likelihood estimators (MLE) across historical loan charge-off severities.
+- **Capital Requirement Delta**: Quantifying the capital shortfall between normal/log-normal assumptions and heavy-tailed Pareto tail estimates at $\alpha = 0.999$.
+
+---
+
+## Act 2: The MRM Audit (Second Line)
+
+### 2.1 Programmatic Data Lineage & Boundary Invariants (`pytest`)
+Independent validation begins prior to parameter estimation by auditing data ingestion integrity:
+- **Schema & Domain Assertions**: Automated `pytest` suite verifying strict non-negativity of Exposure at Default ($\text{EAD} \ge 0$), bounded Loss Given Default ($\text{LGD} \in [0, 1]$), and zero silent `NaN` coercion during multi-table joins.
+- **Outlier Censorship Audit**: Detecting whether winsorization or truncation thresholds in first-line preprocessing artificially suppress tail variance.
+
+### 2.2 Distributional Failure Stress Test
+- Benchmarking model breakdown under synthetic tail contamination and extreme macro loss clustering.
+
+---
+
+## Act 3: The Governance Synthesis
+
+### 3.1 Trade-off Decisions & Operational Limits
+- **Model Selection Rationale**: Why a transparent two-parameter heavy-tailed specification with hard ingestion assertions is favored over an unconstrained multi-parameter density estimator prone to tail overfitting.
+
+### 3.2 Concrete Monitoring Mandates & MRAs
+- **Population Stability Index (PSI)**: Trigger mandatory model recalibration if $\text{PSI} > 0.20$ across quarterly origination cohorts.
+- **Kolmogorov-Smirnov (KS) Tail Test**: Flag a **Matter Requiring Attention (MRA)** if upper-decile empirical loss exceedance breaches the 99% confidence envelope across two consecutive quarters.

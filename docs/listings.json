@@ -1,10 +1,8 @@
 [
   {
-    "listing": "/blog.html",
+    "listing": "/risk-validation.html",
     "items": [
-      "/posts/python-penguins/index.html",
-      "/posts/r-penguins/index.html",
-      "/posts/first-weeks/index.html"
+      "/posts/block-1-data-lineage-tail-risk/index.html"
     ]
   }
 ]

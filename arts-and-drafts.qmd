@@ -1,0 +1,49 @@
+---
+title: "Arts & Draft"
+subtitle: "Phuong Lan Tanaka · Visual Art, Collage & Animation Portfolio"
+page-layout: full
+toc: false
+---
+
+:::: {.art-gallery}
+
+::: {.art-piece}
+![](images/art/girl_on_the_beach_2025.jpg){.art-img alt="Girl on the Beach (Sketch), 2025"}
+
+<p class="art-caption">Girl on the Beach (Sketch), 2025</p>
+:::
+
+::: {.art-piece}
+![](images/art/mp3_vs_cd_2024.jpg){.art-img alt="MP3 vs CD (Collage and Illustration), 2024"}
+
+<p class="art-caption">MP3 vs CD (Collage and Illustration), 2024</p>
+:::
+
+::: {.art-piece}
+![](images/art/filia_2023.jpg){.art-img alt="Filia (Photo and Illustration), 2023"}
+
+<p class="art-caption">Filia (Photo and Illustration), 2023</p>
+:::
+
+::: {.art-piece}
+![](images/art/dylan_keyboard_2022.gif){.art-img alt="Dylan Keyboard (Animation and Collage), 2022"}
+
+<p class="art-caption">Dylan Keyboard (Animation and Collage), 2022</p>
+:::
+
+::: {.art-piece}
+![](images/art/wolf_tulpa_woman_1_2021.jpg){.art-img alt="Wolf Tulpa Woman Part 1 (Sketch and Illustration), 2021"}
+![](images/art/wolf_tulpa_woman_2_2021.jpg){.art-img alt="Wolf Tulpa Woman Part 2 (Sketch and Illustration), 2021"}
+
+<p class="art-caption">Wolf Tulpa Woman (Sketch and Illustration), 2021</p>
+:::
+
+::: {.art-piece}
+<div class="art-video-wrapper">
+<iframe width="870" height="490" src="https://www.youtube.com/embed/VFMaqoUMZHM" title="Tangarine (Rough Animation), 2020" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<p class="art-caption">Tangarine (Rough Animation), 2020</p>
+:::
+
+::::

@@ -1,0 +1,34 @@
+---
+title: "Risk & Validation Projects"
+subtitle: "Quantitative Risk Modeling (1st Line) & Model Risk Management (2nd Line) · UBC MDS Composite Portfolio"
+page-layout: full
+listing:
+  id: project-listings
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  fields: [date, title, subtitle, description, categories, reading-time]
+---
+
+Each project in this portfolio is structured as a **unified 3-act validation paper** fusing **First-Line Quantitative Modeling** (mathematical loss estimation, parameter calibration, stress testing) with **Second-Line Model Risk Management** (independent challenger benchmarking, boundary invariants, and **SR 11-7 / OSFI E-23** governance synthesis). Every paper pairs directly with an audited code repository or interactive application.
+
+---
+
+### Validation Reports & Technical Papers
+
+::: {#project-listings}
+:::
+
+---
+
+### 6-Block UBC MDS Composite Roadmap
+
+| Block | Project Title & Core Anchor | Technical Stack & Coursework | Direct Project Links |
+| :--- | :--- | :--- | :--- |
+| **Block 1** | **Data Lineage & Distributional Failure Audit**<br/>*Enforcing programmatic boundary invariants for heavy-tailed credit loss governance.* | Python, `pytest`, SciPy (Pareto/Weibull), VaR 99.9%<br/>*(DSCI 511, 521, 523, 551)* | [📄 Paper / Post](posts/block-1-data-lineage-tail-risk/index.qmd) · [💻 GitHub Repo](https://github.com/chloesurbeck) |
+| **Block 2** | **Challenger Framework & Statistical Inference**<br/>*Deploying regularized challenger benchmarks for black-box credit model governance.* | LightGBM/XGBoost, Isotonic Calibration, Bootstrap CIs<br/>*(DSCI 512, 531, 552, 571)* | *In Progress (Block 2)* · [💻 GitHub Repo](https://github.com/chloesurbeck) |
+| **Block 3** | **Econometric Stress Loss & Collinearity Defense**<br/>*Running Gauss-Markov diagnostic suites for macroeconomic stress-loss scenario governance.* | FRED API, CCAR/DFAST Stress Vectors, OLS / Ridge / Lasso<br/>*(DSCI 513, 522, 561, 573)* | *Planned (Block 3)* · [💻 GitHub Repo](https://github.com/chloesurbeck) |
+| **Block 4** | **Lifetime Survival Loss & Fair-Lending Packaging**<br/>*Packaging right-censored survival models for IFRS 9 lifetime loss and fair-lending compliance.* | Cox PH, Weibull Survival, CFPB 80% Rule, `mrm_validator` Pkg<br/>*(DSCI 524, 541, 562, 572)* | *Planned (Block 4)* · [💻 GitHub Repo](https://github.com/chloesurbeck) |
+| **Block 5** | **Cloud Simulation, Time Series & Low-Default Priors**<br/>*Scaling distributed Monte Carlo engines for low-default portfolio stress-testing governance.* | Distributed Monte Carlo, Bayesian Priors, Johansen / Chow Tests<br/>*(DSCI 525, 553, 563, 574)* | *Planned (Block 5)* · [💻 GitHub Repo](https://github.com/chloesurbeck) |
+| **Block 6** | **Causal Policy Evaluation & Executive Boardroom Portal**<br/>*Engineering counterfactual causal graphs and contract NLP for underwriting policy intervention audits.* | Causal DAGs, SEC 10-K Transformer NLP, Dash/Shiny MRM Portal<br/>*(DSCI 532, 542, 554, 575)* | *Planned (Block 6)* · [🌐 Live App / Repo](https://github.com/chloesurbeck) |
