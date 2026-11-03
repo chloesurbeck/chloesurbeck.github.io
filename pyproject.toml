@@ -9,4 +9,6 @@ dependencies = [
     "matplotlib>=3.11.2",
     "palmerpenguins>=0.1.6",
     "pandas>=3.0.6",
+    "pytest>=9.2.0",
+    "scipy>=1.18.1",
 ]
